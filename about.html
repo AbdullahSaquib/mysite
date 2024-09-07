@@ -14,5 +14,15 @@
     <h1>About Us</h1>
     <p>This is a simple website demonstrating how to deploy static pages.</p>
 </body>
-<script src="fix_links.js"></script>
+<script>
+    ['a[href^="/"]', 'link[href^="/"]', 'script[src^="/"]', 'img[src^="/"]'].forEach(s =>
+        document.querySelectorAll(s).forEach(e =>
+            e.setAttribute(
+                e.tagName === 'A' || e.tagName === 'LINK' ? 'href' : 'src', 
+                (window.location.hostname.endsWith('.github.io') ? '/mysite' : '')+
+                e.getAttribute(e.tagName === 'A' || e.tagName === 'LINK' ? 'href' : 'src')
+            )
+        )
+    );
+</script>
 </html>
